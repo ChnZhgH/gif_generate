@@ -6,3 +6,6 @@
 */**/**/*.pyc
 */.DS_Store
 .DS_Store
+tmp/gifs/*
+tmp/images/*
+tmp/videos/*

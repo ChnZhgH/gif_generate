@@ -21,6 +21,7 @@ from gif_gen.src.controller import gif_controller
 urlpatterns = [
     path('admin/', admin.site.urls),
     path(r'', views.index),
-    path(r'upload_images', gif_controller.upload_images, name='upload_images')
+    path(r'upload_images', gif_controller.upload_images),
+    path(r'upload_video', gif_controller.upload_video)
 
 ]
