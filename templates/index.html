@@ -6,36 +6,274 @@
     <!-- import CSS -->
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
 </head>
-<body itemtype="http://schema.org/SoftwareApplication">
+<body>
 
 <div id="app">
-    <el-card class="box-card">
+    <div class="main-write" >
+        <h2>任意视频转GIF</h2>
+        <div class="functions-box">
         <el-upload
-          class="upload-demo"
-          drag
-          action="https://jsonplaceholder.typicode.com/posts/"
-          multiple>
-          <i class="el-icon-upload"></i>
-          <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
-          <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
+            class="upload-demo"
+            drag
+            name="my_file"
+            :action="uploadVideoApi"
+            :show-file-list="false"
+            :on-success="handleAvatarSuccess">
+    {#        :before-upload="beforeAvatarUpload">#}
+            <div v-if="imageUrl" class="box-before-after workbench pdf-workbench">
+                <div class="container">
+
+                    <div class="file-item">
+                        <div class="file-item-list">
+                            <video preload="auto" :src="imageUrl" width="858px" height="386px" x5-playsinline="" playsinline="" webkit-playsinline="" style="" controls >您的浏览器不支持视频播放</video>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <i v-if="imageUrl == ''" class="el-icon-upload"></i>
+            <div v-if="imageUrl == ''" class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+
         </el-upload>
-    </el-card>
+            <div class="btn-group">
+                <div v-if="is_transform">
+{#                    <el-button class="re-add">重新添加</el-button>#}
+                    <a :href="'http://localhost:8000/download/gif?video_name=' + this.video_name">
+                        <el-button class="download-now" >立即下载</el-button>
+                    </a>
+
+                </div>
+                <div v-else="is_transform">
+                    <el-button autofocus class="begin-work" @click="startTransform">开始转换</el-button>
+                </div>
+            </div>
+        </div>
+        <img data-src="//qncdnimg.aoscdn.com/img/edit-online/middle.png?1561125357.114" src="//qncdnimg.aoscdn.com/img/edit-online/middle.png?1561125357.114" class="middle-bg lazyloading">
+    </div>
 </div>
+
 </body>
 
 <!-- import Vue before Element -->
 <script src="https://unpkg.com/vue/dist/vue.js"></script>
 <!-- import JavaScript -->
 <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
     new Vue({
         el: '#app',
         data: function() {
-            return { visible: false }
+            return {
+                uploadVideoApi: 'upload/video',
+                imageUrl: '',
+                is_transform: false,
+                video_path: '',
+                video_name: ''
+
+            }
+        },
+        methods: {
+            handleAvatarSuccess(res, file) {
+                this.video_path = res.file_path;
+                this.video_name = res.file_name;
+                this.is_transform = false;
+                this.imageUrl = URL.createObjectURL(file.raw);
+                {#console.log(this.imageUrl)#}
+            },
+            beforeAvatarUpload(file) {
+                {#const isJPG = file.type === 'image/jpeg';#}
+                {#const isLt2M = file.size / 1024 / 1024 < 2;#}
+
+                return true;
+            },
+            startTransform() {
+                axios.post('/transform',
+                    JSON.stringify({'video_path': this.video_path, 'video_name': this.video_name}),
+                    {headers:{'Content-Type': 'application/json'}})
+                    .then((res)=>{
+                        console.log(res)
+                        this.is_transform = !this.is_transform
+                        console.log(this.is_transform)
+                    }).catch(e=>{
+                        Message.error(e.response.data.message)
+                })
+            },
+
         }
     })
 </script>
+<style>
+  .avatar-uploader .el-upload {
+    border: 1px dashed #d9d9d9;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .avatar-uploader .el-upload:hover {
+    border-color: #409EFF;
+  }
 
+  .avatar-uploader-icon {
+    font-size: 28px;
+    color: #8c939d;
+    width: 878px;
+    height: 478px;
+    line-height: 478px;
+    text-align: center;
+  }
+
+
+
+  .middle-bg {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    width: 100%;
+    height: auto;
+    bottom: -10px;
+    margin-top: 40px;
+  }
+
+  .main-write {
+    text-align: center;
+    padding: 80px 0 0 0;
+  }
+
+  .main-write h2 {
+    position: relative;
+    z-index: 2;
+    font-size: 42px;
+    font-family: SourceHanSansCN-Regular, Avenir, Helvetica;
+    color: #4159ff;
+    margin-top: 0px;
+    line-height: 68px;
+  }
+
+  .upload-demo {
+    {#text-align: center;#}
+    position: relative;
+  }
+
+
+  .el-upload {
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+  }
+
+  .el-upload-dragger {
+    background-color: #fff;
+    border: 1px dashed #d9d9d9;
+    border-radius: 6px;
+    box-sizing: border-box;
+    width: 860px;
+    height: 368px;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .el-upload-dragger .el-icon-upload {
+    font-size: 67px;
+    color: #c0c4cc;
+    margin: 140px 0 11px;
+    line-height: 50px;
+  }
+
+  .el-upload-dragger .el-upload__text {
+    color: #606266;
+    font-size: 14px;
+    text-align: center;
+  }
+
+  .container .avatar {
+    position: relative;
+    text-align: center;
+    margin: 0 auto;/*水平居中*/
+    {#transform:translateY(50%);#}
+    {#margin-bottom: 10px#}
+  }
+
+  .main-write .box-before-after {
+    position: relative;
+  }
+
+  .main-write .container {
+    position: relative;
+    z-index: 2;
+    background: #fff;
+    border: 2px solid #f3f3f3;
+    box-shadow: 0px 0px 30px 0px #eef2ff;
+    height: 368px;
+}
+
+    .file-item {
+        position: relative;
+        overflow: auto;
+        font-size: 14px;
+        {#text-align: left;#}
+        width: 100%;
+        {#padding: 20px;#}
+        border-bottom: 1px solid #EEEEEE;
+    }
+    .file-item .file-item-list {
+        height: 368px;
+        position: relative;
+    }
+
+    video {
+        display: block;
+        margin: 0 auto;
+        background-color: #FFF;
+    }
+
+    video[Attributes Style] {
+        width: 1043px;
+        height: 368px;
+    }
+
+    .functions-box {
+        margin: 40px 0 0px;
+    }
+
+    *, :after, :before {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    .main-write .container .btn-group {
+        margin: 20px 0;
+    }
+
+  .begin-work, .re-add, .download-now {
+      display: inline-block;
+      text-align: center;
+      font-size: 20px;
+      height: 53px;
+      width: 258px;
+      line-height: 53px;
+      border: 1px solid #4159ff;
+      border-radius: 28px;
+      background-color: #4159ff;
+      text-decoration: none;
+      color: #fff;
+      margin-top: 30px;
+      padding: 0px 0px;
+
+  }
+
+
+  a {
+      cursor: pointer;
+  }
+
+  video {
+      object-fit: contain;
+  }
+</style>
 
 </html>
 

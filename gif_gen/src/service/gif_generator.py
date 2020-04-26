@@ -1,6 +1,7 @@
 import functools
 import os
 import imageio
+import time
 
 from .video_processor import VideoProcessor
 
@@ -18,16 +19,17 @@ class GifGenerator(object):
 
         # 2. 视频拆成图片，保存到临时文件夹
         video_processor = VideoProcessor()
-        video_processor.video2images(video_path, self.IMAGES_DIR, freq=5)
+        video_processor.video2images(video_path, self.IMAGES_DIR, freq=2)
 
         # 3. 多张图片，拼成gif
+        start = time.clock()
         image_list = []
         file_names = os.listdir(self.IMAGES_DIR)
 
         file_names.sort(key=functools.cmp_to_key(self.file_cmp))
         for file_name in file_names:
             image_list.append(self.IMAGES_DIR + "/" + file_name)
-        self.images2gif(image_list, gif_path, duration=0.2)
+        self.images2gif(image_list, gif_path, duration=0.1)
 
     def images2gif(self, image_path_list, gif_path, duration=0.2):
         """
