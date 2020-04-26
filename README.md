@@ -4,6 +4,18 @@
 
 不过不管是Windows还是Mac，都需要装个anaconda
 
+效果图如下：
+
+![image-20200426175354454](image/README.asset/image-20200426175354454.png)
+
+转换完成后，便可直接下载
+
+![image-20200426175509987](image/README.asset/image-20200426175509987.png)
+
+继续拖拽图片到上传框或点击上传框，可重新上传视频文件。
+
+
+
 
 
 
