@@ -2,3 +2,4 @@ imageio
 imageio-ffmpeg
 requests
 moviepy
+opencv-python

@@ -20,33 +20,76 @@
 
 
 
-## 工具使用方法
+## 工具使用方法---Mac & Linux
 
-* 拷贝源码至本地：
+* 方法一(最佳方式，使用conda环境)：
+
+    1. 拷贝源码至本地：
 
     ```bash
     git clone ...
     cd gif_generate
     ```
 
-* 安装项目依赖，并切换conda环境：
+    2. 安装项目依赖，并切换conda环境：
 
     ```bash
     conda env create -f env.yml
     conda activate gif_generate
     ```
 
-* 运行该工具
+    3. 运行该工具
 
     ```bash
-    python manager.py runserver
+    python manage.py runserver
     ```
 
-* 打开浏览器，地址栏输入: localhost:8000，然后尽情使用
+    4. 打开浏览器，地址栏输入: localhost:8000，然后尽情使用
+    5. 后续要使用都很简单，打开终端输入一下两行命令，然后尽情玩耍：
+
+    ```bash
+    conda activate gif_generate
+    python manage.py runserver
+    ```
+
+    
+
+
+
+* 方法二(Mac和Linux自带了pip了，所以也是可以用的)
+
+    1. 打开终端，拷贝源码至本地：
+
+    ```bash
+    git clone ...
+    cd gif_generate
+    ```
+
+    2. 使用pip安装项目依赖，不过直接怎么操作，没有虚拟环境了呢
+
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+    3. 运行该工具
+
+    ```bash
+    python manage.py runserver
+    ```
+
+    4. 打开浏览器，地址栏输入: localhost:8000，然后尽情使用
+
+    5. 后续只用，值需要运行步骤3的命令即可
 
 
 
 
+
+## 工具使用方法---Windows
+
+* 如果是Windows用户，要么选择装anaconda(推荐)，要么选择装python3
+
+* 后续步骤和Mac及Linux一样
 
 
 
@@ -69,12 +112,10 @@
     conda env -n fig_generate
     conda activate fig_generate
     
-    # 安装依赖
+    # 在环境中安装依赖
     pip install -r requirements.txt
     conda install --channel https://conda.anaconda.org/menpo opencv
     ```
-
-    
 
 
 
