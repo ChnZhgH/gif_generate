@@ -46,3 +46,47 @@
 
 
 
+
+
+
+
+
+
+
+
+## 使用问题汇总：
+
+* 如果你使用命令创建环境失败：
+
+    ```bash
+    conda env create -f env.yml
+    ```
+
+    那么可执行以下命令去完成环境构建：
+
+    ```bash
+    # 创建并进入环境，若显示环境已存在，则直接进入即可
+    conda env -n fig_generate
+    conda activate fig_generate
+    
+    # 安装依赖
+    pip install -r requirements.txt
+    conda install --channel https://conda.anaconda.org/menpo opencv
+    ```
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
