@@ -23,7 +23,7 @@ urlpatterns = [
     path(r'', views.index),
     path(r'upload_images', gif_controller.upload_images),
     path(r'upload/video', gif_controller.upload_video),
-    path(r'transform', gif_controller.video_to_gif),
+    path(r'transform', gif_controller.video_to_gif_quick),
     path(r'download/gif', gif_controller.download)
 
 ]

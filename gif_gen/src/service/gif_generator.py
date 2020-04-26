@@ -4,11 +4,16 @@ import imageio
 import time
 
 from .video_processor import VideoProcessor
+import moviepy.editor as mpy
 
 
 class GifGenerator(object):
     def __init__(self):
         self.IMAGES_DIR = os.path.join(os.getcwd(), "tmp/images")
+
+    def video2gif_quick(self, video_path, gif_path):
+        content = mpy.VideoFileClip(video_path)
+        content.write_gif(gif_path, fps=5)
 
     def video2gif(self, video_path, gif_path):
         # 1. 清空临时文件夹

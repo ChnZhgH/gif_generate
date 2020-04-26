@@ -39,6 +39,17 @@ def video_to_gif(request):
     return JsonResponse({'message': 'transform over.'})
 
 
+def video_to_gif_quick(request):
+    GIFS_DIR = os.path.join(os.getcwd(), "tmp/gifs/")
+    gif_gen = GifGenerator()
+    # video_path = eval(request.body.decode()).get('video_path')
+    body = json.loads(request.body.decode())
+    video_path = body.get('video_path')
+    video_name = body.get('video_name')
+    gif_name = build_gif_name(video_name)
+    gif_gen.video2gif_quick(video_path, GIFS_DIR + gif_name)
+    return JsonResponse({'message': 'transform over.'})
+
 def images_to_gif(request):
     pass
 

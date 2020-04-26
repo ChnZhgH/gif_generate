@@ -12,17 +12,16 @@
     <div class="main-write" >
         <h2>任意视频转GIF</h2>
         <div class="functions-box">
-        <el-upload
+            <el-upload
             class="upload-demo"
             drag
             name="my_file"
             :action="uploadVideoApi"
             :show-file-list="false"
-            :on-success="handleAvatarSuccess">
-    {#        :before-upload="beforeAvatarUpload">#}
+            :on-success="handleAvatarSuccess"
+            :before-upload="beforeAvatarUpload">
             <div v-if="imageUrl" class="box-before-after workbench pdf-workbench">
                 <div class="container">
-
                     <div class="file-item">
                         <div class="file-item-list">
                             <video preload="auto" :src="imageUrl" width="858px" height="386px" x5-playsinline="" playsinline="" webkit-playsinline="" style="" controls >您的浏览器不支持视频播放</video>
@@ -32,22 +31,24 @@
             </div>
             <i v-if="imageUrl == ''" class="el-icon-upload"></i>
             <div v-if="imageUrl == ''" class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
-
         </el-upload>
             <div class="btn-group">
                 <div v-if="is_transform">
 {#                    <el-button class="re-add">重新添加</el-button>#}
-                    <a :href="'http://localhost:8000/download/gif?video_name=' + this.video_name">
-                        <el-button class="download-now" >立即下载</el-button>
-                    </a>
+                <a :href="'http://localhost:8000/download/gif?video_name=' + this.video_name">
+                    <el-button class="download-now" >立即下载</el-button>
+                </a>
 
-                </div>
+            </div>
                 <div v-else="is_transform">
-                    <el-button autofocus class="begin-work" @click="startTransform">开始转换</el-button>
-                </div>
+                <el-button autofocus class="begin-work" @click="startTransform" :disabled="this.loading">
+                    开始转换
+                </el-button>
+            </div>
             </div>
         </div>
-        <img data-src="//qncdnimg.aoscdn.com/img/edit-online/middle.png?1561125357.114" src="//qncdnimg.aoscdn.com/img/edit-online/middle.png?1561125357.114" class="middle-bg lazyloading">
+        <img data-src="//qncdnimg.aoscdn.com/img/edit-online/middle.png?1561125357.114"
+             src="//qncdnimg.aoscdn.com/img/edit-online/middle.png?1561125357.114" class="middle-bg lazyloading">
     </div>
 </div>
 
@@ -67,8 +68,10 @@
                 imageUrl: '',
                 is_transform: false,
                 video_path: '',
-                video_name: ''
-
+                video_name: '',
+                loading: false,
+                transform_desc: '开始转换',
+                uploaded: false
             }
         },
         methods: {
@@ -77,6 +80,7 @@
                 this.video_name = res.file_name;
                 this.is_transform = false;
                 this.imageUrl = URL.createObjectURL(file.raw);
+                this.uploaded = true;
                 {#console.log(this.imageUrl)#}
             },
             beforeAvatarUpload(file) {
@@ -86,15 +90,21 @@
                 return true;
             },
             startTransform() {
+                if (!this.uploaded) {
+                    this.$message.error('还未上传视频!');
+                    return;
+                }
+                this.loading = true
+                this.$message.info('正在进行转换，请稍后...')
                 axios.post('/transform',
                     JSON.stringify({'video_path': this.video_path, 'video_name': this.video_name}),
                     {headers:{'Content-Type': 'application/json'}})
                     .then((res)=>{
-                        console.log(res)
                         this.is_transform = !this.is_transform
-                        console.log(this.is_transform)
+                        this.loading = false
+                        this.$message.info('转换完成.')
                     }).catch(e=>{
-                        Message.error(e.response.data.message)
+                        this.$message.error(e.response.data.message)
                 })
             },
 
