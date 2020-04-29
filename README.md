@@ -20,7 +20,7 @@
 
 
 
-## 工具使用方法---Mac & Linux
+## 工具使用方法
 
 * 方法一(最佳方式，使用conda环境)：
 
@@ -52,11 +52,22 @@
     python manage.py runserver
     ```
 
+    (PS：如果你和我一样，觉得每次激活环境很麻烦，每次cd到项目路径下启动服务很麻烦，可以参照如下：)
+    
+    ```bash
+    # 根据自己anaconda安装路径配置
+    source /Library/anaconda3/etc/profile.d/conda.sh
+    # 激活conda环境
+    conda activate gif_generate
+    # 启动服务，根据自己的项目位置进行对应修改
+    python ~/Projects/py.project/gif_generate/manage.py runserver
+    ```
+    
     
 
 
 
-* 方法二(Mac和Linux自带了pip了，所以也是可以用的)
+* 方法二(Mac和Linux自带了pip了，Windows需要自行安装python3)
 
     1. 打开终端，拷贝源码至本地：
 
@@ -78,20 +89,7 @@
     ```
 
     4. 打开浏览器，地址栏输入: localhost:8000，然后尽情使用
-
-    5. 后续只用，值需要运行步骤3的命令即可
-
-
-
-
-
-## 工具使用方法---Windows
-
-* 如果是Windows用户，要么选择装anaconda(推荐)，要么选择装python3
-
-* 后续步骤和Mac及Linux一样
-
-
+5. 后续只用，值需要运行步骤3的命令即可
 
 
 
