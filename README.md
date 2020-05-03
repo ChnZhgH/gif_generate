@@ -52,16 +52,6 @@
     python manage.py runserver
     ```
 
-    (PS：如果你和我一样，觉得每次激活环境很麻烦，每次cd到项目路径下启动服务很麻烦，可以参照如下：)
-    
-    ```bash
-    # 根据自己anaconda安装路径配置
-    source /Library/anaconda3/etc/profile.d/conda.sh
-    # 激活conda环境
-    conda activate gif_generate
-    # 启动服务，根据自己的项目位置进行对应修改
-    python ~/Projects/py.project/gif_generate/manage.py runserver
-    ```
     
     
 
