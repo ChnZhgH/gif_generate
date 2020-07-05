@@ -1,6 +1,7 @@
-imageio
-imageio-ffmpeg
-requests
-moviepy
-opencv-python
-django
+imageio==2.8.0
+imageio-ffmpeg==0.4.1
+requests==2.23.0
+moviepy==1.0.2
+django==3.0.3
+numpy==1.18.1
+pillow==7.0.0

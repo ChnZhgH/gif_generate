@@ -20,14 +20,49 @@
 
 
 
-## 工具使用方法
+## 工具使用方法(三种方式)
 
-* 方法一(最佳方式，使用conda环境)：
+* 方法1：docker部署(推荐)：
+
+    1. 拷贝源代码至本地：
+
+        ```bash
+        git clone https://github.com/ChnZhgH/gif_generate
+        cd gif_generate
+        ```
+
+    2. 构建docker镜像：
+
+        ```bash
+        docker build -t gif:v1 .
+        ```
+    
+3. 运行docker镜像：
+    
+    ```bash
+        docker run -d --name gif_web -p 8000:8000 gif:v1
+        ```
+    
+4. 打开浏览器，地址栏输入: localhost:8000，然后尽情使用
+    
+    5. 后续使用：
+
+        ```bash
+        # 不想用了，停止即可：
+        docker container stop gif_web
+        # 想继续用了，开始即可：
+        docker container start gif_web
+        # 想删除了，删掉即可：
+        docker container rm gif_web
+        docker image rm gif:v1
+        ```
+    
+* 方法2：使用conda环境
 
     1. 拷贝源码至本地：
 
     ```bash
-    git clone ...
+    git clone https://github.com/ChnZhgH/gif_generate
     cd gif_generate
     ```
 
@@ -53,11 +88,8 @@
     ```
 
     
-    
 
-
-
-* 方法二(Mac和Linux自带了pip了，Windows需要自行安装python3)
+* 方法三：pip安装(Mac和Linux自带了pip了，Windows需要自行安装python3)
 
     1. 打开终端，拷贝源码至本地：
 
