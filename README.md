@@ -24,28 +24,28 @@
 
 * 方法1：docker部署(推荐)：
 
-    1. 拷贝源代码至本地：
+     A. 拷贝源代码至本地：
 
         ```bash
         git clone https://github.com/ChnZhgH/gif_generate
         cd gif_generate
         ```
 
-    2. 构建docker镜像：
+     B. 构建docker镜像：
 
         ```bash
         docker build -t gif:v1 .
         ```
     
-3. 运行docker镜像：
-    
-    ```bash
+     C. 运行docker镜像：
+  
+        ```bash
         docker run -d --name gif_web -p 8000:8000 gif:v1
         ```
     
-4. 打开浏览器，地址栏输入: localhost:8000，然后尽情使用
-    
-    5. 后续使用：
+     D. 打开浏览器，地址栏输入: localhost:8000，然后尽情使用
+  
+     E. 后续使用：
 
         ```bash
         # 不想用了，停止即可：
@@ -59,59 +59,61 @@
     
 * 方法2：使用conda环境
 
-    1. 拷贝源码至本地：
+     A. 拷贝源码至本地：
 
-    ```bash
-    git clone https://github.com/ChnZhgH/gif_generate
-    cd gif_generate
-    ```
+     ```bash
+     git clone https://github.com/ChnZhgH/gif_generate
+     cd gif_generate
+     ```
 
-    2. 安装项目依赖，并切换conda环境：
+     B. 安装项目依赖，并切换conda环境：
 
-    ```bash
-    conda env create -f env.yml
-    conda activate gif_generate
-    ```
+     ```bash
+     conda env create -f env.yml
+     conda activate gif_generate
+     ```
 
-    3. 运行该工具
+     C. 运行该工具
 
-    ```bash
-    python manage.py runserver
-    ```
+     ```bash
+     python manage.py runserver
+     ```
 
-    4. 打开浏览器，地址栏输入: localhost:8000，然后尽情使用
-    5. 后续要使用都很简单，打开终端输入一下两行命令，然后尽情玩耍：
+     D. 打开浏览器，地址栏输入: localhost:8000，然后尽情使用
+     <br/>
+     E. 后续要使用都很简单，打开终端输入一下两行命令，然后尽情玩耍：
 
-    ```bash
-    conda activate gif_generate
-    python manage.py runserver
-    ```
+     ```bash
+     conda activate gif_generate
+     python manage.py runserver
+     ```
 
     
 
 * 方法三：pip安装(Mac和Linux自带了pip了，Windows需要自行安装python3)
 
-    1. 打开终端，拷贝源码至本地：
+     A. 打开终端，拷贝源码至本地：
 
-    ```bash
-    git clone ...
-    cd gif_generate
-    ```
+     ```bash
+     git clone ...
+     cd gif_generate
+     ```
 
-    2. 使用pip安装项目依赖，不过直接怎么操作，没有虚拟环境了呢
+     B. 使用pip安装项目依赖，不过直接怎么操作，没有虚拟环境了呢
 
-    ```bash
-    pip install -r requirements.txt
-    ```
+     ```bash
+     pip install -r requirements.txt
+     ```
 
-    3. 运行该工具
+     C. 运行该工具
 
-    ```bash
-    python manage.py runserver
-    ```
+     ```bash
+     python manage.py runserver
+     ```
 
-    4. 打开浏览器，地址栏输入: localhost:8000，然后尽情使用
-    5. 后续只需要运行步骤3的命令即可
+     D. 打开浏览器，地址栏输入: localhost:8000，然后尽情使用
+     <br/>
+     E. 后续只需要运行步骤3的命令即可
 
 
 
