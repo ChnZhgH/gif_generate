@@ -3,5 +3,5 @@ imageio-ffmpeg==0.4.1
 requests==2.23.0
 moviepy==1.0.2
 django==3.0.3
-numpy==1.18.1
+numpy==1.22.0
 pillow==7.0.0
